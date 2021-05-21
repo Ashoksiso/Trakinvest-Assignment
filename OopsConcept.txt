@@ -1,0 +1,173 @@
+Encapsulation : -
+Say we have a program. It has a few logically different objects which communicate with each other — according to the rules defined in the program.
+Encapsulation is achieved when each object keeps its state private, inside a class. Other objects don’t have direct access to this state. Instead, they can only call a list of public functions — called methods.
+
+Program ; -
+class Encapsulate {
+    private String testName;
+    private int testRoll;
+    private int testAge;
+    public int getAge() { return testAge; }
+    public String getName() { return testName; }
+    public int getRoll() { return testRoll; }
+ 
+    public void setAge(int newAge) { testAge = newAge; }
+ 
+    public void setName(String newName)
+    {
+        testName = newName;
+    }
+    public void setRoll(int newRoll) { testRoll = newRoll; }
+}
+ 
+public class TestEncapsulation {
+    public static void main(String[] args)
+    {
+        Encapsulate obj = new Encapsulate();
+         obj.setName("Harsh");
+        obj.setAge(19);
+        obj.setRoll(51);
+ 
+        System.out.println("Test's name: " + obj.getName());
+        System.out.println("Test's age: " + obj.getAge());
+        System.out.println("Test's roll: " + obj.getRoll());
+    }
+}
+
+Abstraction : -
+
+Abstraction can be thought of as a natural extension of encapsulation.
+In object-oriented design, programs are often extremely large. And separate objects communicate with each other a lot. So maintaining a large codebase like this for years — with changes along the way — is difficult.
+Abstraction is a concept aiming to ease this problem.
+Applying abstraction means that each object should only expose a high-level mechanism for using it.
+This mechanism should hide internal implementation details. It should only reveal operations relevant for the other objects.
+
+Program : -
+
+abstract class Shape {
+    String color;
+    abstract double area();
+    public abstract String toString();
+ 
+    public Shape(String color)
+    {
+        System.out.println("Shape constructor called");
+        this.color = color;
+    }
+ 
+    public String getColor() { return color; }
+}
+class Circle extends Shape {
+    double radius;
+ 
+    public Circle(String color, double radius)
+    {
+         super(color);
+        System.out.println("Circle constructor called");
+        this.radius = radius;
+    }
+ 
+    @Override double area()
+    {
+        return Math.PI * Math.pow(radius, 2);
+    }
+ 
+    @Override public String toString()
+    {
+        return "Circle color is " + super.getColor()
+            + "and area is : " + area();
+    }
+}
+class Rectangle extends Shape {
+ 
+    double length;
+    double width;
+ 
+    public Rectangle(String color, double length,
+                     double width)
+    {
+        super(color);
+        System.out.println("Rectangle constructor called");
+        this.length = length;
+        this.width = width;
+    }
+ 
+    @Override double area() { return length * width; }
+ 
+    @Override public String toString()
+    {
+        return "Rectangle color is " + super.getColor()
+            + "and area is : " + area();
+    }
+}
+public class Test {
+    public static void main(String[] args)
+    {
+        Shape s1 = new Circle("Red", 2.2);
+        Shape s2 = new Rectangle("Yellow", 2, 4);
+ 
+        System.out.println(s1.toString());
+        System.out.println(s2.toString());
+    }
+}
+
+
+Inheritance : -
+
+Inheritance is an important pillar of OOP(Object-Oriented Programming). It is the mechanism in java by which one class is allowed to inherit the features(fields and methods) of another class. 
+Super Class: The class whose features are inherited is known as superclass(or a base class or a parent class).
+Sub Class: The class that inherits the other class is known as a subclass(or a derived class, extended class, or child class). The subclass can add its own fields and methods in addition to the superclass fields and methods.
+Reusability: Inheritance supports the concept of “reusability”, i.e. when we want to create a new class and there is already a class that includes some of the code that we want, we can derive our new class from the existing class. By doing this, we are reusing the fields and methods of the existing class.
+
+Program : -
+
+class Employee{  
+ float salary=40000;  
+}  
+class Programmer extends Employee{  
+ int bonus=10000;  
+ public static void main(String args[]){  
+   Programmer p=new Programmer();  
+   System.out.println("Programmer salary is:"+p.salary);  
+   System.out.println("Bonus of Programmer is:"+p.bonus);  
+}  
+}  
+
+Polymorphism : -
+Polymorphism means "many forms", and it occurs when we have many classes that are related to each other by inheritance.
+
+Like we specified in the previous chapter; Inheritance lets us inherit attributes and methods from another class. Polymorphism uses those methods to perform different tasks. This allows us to perform a single action in different ways.
+
+Program :-
+
+class Animal {
+  public void animalSound() {
+    System.out.println("The animal makes a sound");
+  }
+}
+
+class Pig extends Animal {
+  public void animalSound() {
+    System.out.println("The pig says: wee wee");
+  }
+}
+
+class Dog extends Animal {
+  public void animalSound() {
+    System.out.println("The dog says: bow wow");
+  }
+}
+
+class Main {
+  public static void main(String[] args) {
+    Animal myAnimal = new Animal();  // Create a Animal object
+    Animal myPig = new Pig();  // Create a Pig object
+    Animal myDog = new Dog();  // Create a Dog object
+    myAnimal.animalSound();
+    myPig.animalSound();
+    myDog.animalSound();
+  }
+}
+
+
+
